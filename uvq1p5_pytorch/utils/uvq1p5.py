@@ -124,7 +124,7 @@ class UVQ1p5(nn.Module):
       A dictionary containing the overall UVQ 1.5 score, per-frame scores,
       and frame indices.
     """
-    video_1080p, _ = self.load_video(
+    video_1080p, num_actual_frames = self.load_video(
         video_filename,
         video_length,
         transpose,
@@ -149,8 +149,8 @@ class UVQ1p5(nn.Module):
       with torch.inference_mode():
         prediction = self.uvq1p5_core(video_1080p)
 
-    video_score = torch.mean(prediction).item()
-    frame_scores = prediction.numpy().flatten().tolist()
+    video_score = torch.mean(prediction[:num_actual_frames]).item()
+    frame_scores = prediction.numpy().flatten()[:num_actual_frames].tolist()
 
     if orig_fps:
       frame_indices = [
