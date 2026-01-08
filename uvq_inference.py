@@ -262,8 +262,8 @@ def setup_parser():
   parser.add_argument(
       "--fps",
       type=int,
-      default=1,
-      help="Frames per second to sample for UVQ1.5. -1 to sample all frames."
+      default=-1,
+      help="Frames per second to sample for UVQ1.5. -1 to sample all frames.(default: -1)."
       " Ignored for UVQ1.0.",
   )
   parser.add_argument(
